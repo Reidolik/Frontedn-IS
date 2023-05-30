@@ -17,8 +17,8 @@ const Sidebar = ({ children }) => {
                         Inicio
                     </Link>
                 </li>
-                <li className={router.pathname === "/1" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
-                    <Link href="/" className="text-white block mx-5">
+                <li className={router.pathname === "/verificarvotante" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/verificarvotante" className="text-white block mx-5">
                         Verificar votante
                     </Link>
                 </li>

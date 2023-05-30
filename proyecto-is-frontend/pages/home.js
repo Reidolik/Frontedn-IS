@@ -13,9 +13,9 @@ const Home = () => {
                 <h1 className="text-3xl font-bold text-blue-900 mx-20 my-5">¡Bienvenido!</h1>
 
                 {/* Progreso */}
-                <div className="flex justify-center mx-40 bg-gray-800 rounded-lg border border-gray-100">
+                <div className="flex justify-center mx-40 bg-gray-800 overflow-hidden rounded-lg border border-gray-100">
                     <a
-                        href="#"
+                        
                         className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8 flex-grow"
                     >
                         <span
