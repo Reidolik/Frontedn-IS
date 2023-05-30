@@ -1,0 +1,21 @@
+{
+  "name": "proyecto-is-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.14",
+    "formik": "^2.4.0",
+    "graphql": "^16.6.0",
+    "next": "13.4.4",
+    "node-fetch": "^2.6.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "yup": "^1.2.0"
+  }
+}
