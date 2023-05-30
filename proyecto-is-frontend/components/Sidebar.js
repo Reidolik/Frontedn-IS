@@ -22,9 +22,9 @@ const Sidebar = ({ children }) => {
                         Verificar votante
                     </Link>
                 </li>
-                <li className={router.pathname === "/2" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
-                    <Link href="/" className="text-white block mx-5">
-                        Verificar votante
+                <li className={router.pathname === "/iniciareleccion" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/iniciareleccion" className="text-white block mx-5">
+                        Iniciar elección
                     </Link>
                 </li>
             </nav>

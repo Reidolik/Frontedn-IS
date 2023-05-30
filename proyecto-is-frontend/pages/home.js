@@ -7,15 +7,28 @@ const Home = () => {
     //Routing
     const router = useRouter()
 
+    const irAIniciarEleccion = () => {
+        router.push('/iniciareleccion')
+    }
+
     return (
         <>
             <Layout>
-                <h1 className="text-3xl font-bold text-blue-900 mx-20 my-5">¡Bienvenido!</h1>
+                <div className="flex justify-between mx-20 my-5">
+                    <h1 className="text-3xl font-bold text-blue-900">¡Bienvenido!</h1>
+                    <button
+                        type="button"
+                        className="bg-green-800 text-white font-bold p-2 border border-gray-300 rounded-lg"
+                        onClick={() => irAIniciarEleccion()}
+                    >
+                        ¡Iniciar elección!
+                    </button>
+                </div>
 
                 {/* Progreso */}
                 <div className="flex justify-center mx-40 bg-gray-800 overflow-hidden rounded-lg border border-gray-100">
                     <a
-                        
+
                         className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8 flex-grow"
                     >
                         <span
@@ -42,7 +55,7 @@ const Home = () => {
                                     >
                                         <span
                                             className="block h-4 rounded-full bg-indigo-600 text-center text-[10px]/4"
-                                            style={{width: '80%'}}
+                                            style={{ width: '80%' }}
                                         >
                                             <span class="font-bold text-white"> 80% </span>
                                         </span>

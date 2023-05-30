@@ -47,8 +47,6 @@ const VerificarVotante = () => {
                     }
                 })
 
-                console.log(data)
-
                 const { nombre, apellido } = data.autenticarCiudadano
 
                 guardarMensaje(`Autenticando...`)
