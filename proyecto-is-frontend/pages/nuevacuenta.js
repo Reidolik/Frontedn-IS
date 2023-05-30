@@ -3,8 +3,9 @@ import Layout from "@/components/Layout"
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useQuery, useMutation, gql } from "@apollo/client"
+import { useRouter } from "next/router"
 
-const CREAR_USUARIO = gql `
+const CREAR_USUARIO = gql`
     mutation registrarNuevoUsuario($input: UsuarioInput!) {
     nuevoUsuario(input: $input) {
         id
@@ -20,9 +21,13 @@ const NuevaCuenta = () => {
 
     //Mensaje
     const [mensaje, guardarMensaje] = useState(null)
+    const [isError, setIsError] = useState(false)
 
     //Obtener usuario
-    const [ nuevoUsuario] = useMutation(CREAR_USUARIO)
+    const [nuevoUsuario] = useMutation(CREAR_USUARIO)
+
+    //Routing
+    const router = useRouter()
 
     //validacion del formulario
     const formik = useFormik({
@@ -43,7 +48,7 @@ const NuevaCuenta = () => {
             const { nombre, apellido, email, password } = valores
 
             try {
-                const {data} = await nuevoUsuario({
+                const { data } = await nuevoUsuario({
                     variables: {
                         input: {
                             nombre,
@@ -54,13 +59,23 @@ const NuevaCuenta = () => {
                     }
                 })
 
+                console.log(data)
                 //Usuario creado correctamente
+                guardarMensaje(`Se creo correctamente el usuario`)
+                setTimeout(() => {
+                    guardarMensaje(null)
+                    //redirigir al usuario
+                    router.push('/login')
+                }, 2000);
+
 
 
             } catch (error) {
+                setIsError(true)
                 guardarMensaje(error.message.replace('ApolloError: ', ''))
                 setTimeout(() => {
                     guardarMensaje(null)
+                    setIsError(false)
                 }, 2000);
             }
         }
@@ -68,9 +83,22 @@ const NuevaCuenta = () => {
 
     const mostrarMensaje = () => {
         return (
-            <div className="bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto text-red-600">
-                <p>{mensaje}</p>
-            </div>
+            <>
+            {isError 
+                ?
+                (
+                    <div className="bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto text-red-600">
+                        <p>{mensaje}</p>
+                    </div>
+                )
+                :
+                (
+                    <div className="bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto text-green-600">
+                    <p>{mensaje}</p>
+                    </div>
+                )
+            }
+            </>
         )
     }
 

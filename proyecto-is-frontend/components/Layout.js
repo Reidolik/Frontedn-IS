@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
                     </div>
                 )
             :
-                router.pathname === "/home"
+                router.pathname === "/"
                 ?
                     (
                         <div className="bg-gray-800 min-h-screen">
