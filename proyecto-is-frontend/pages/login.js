@@ -67,7 +67,7 @@ const Login = () => {
 
     const mostrarMensaje = () => {
         return (
-            <div className="bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto text-red-600">
+            <div className="bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto text-red-600 rounded-lg shadow-md outline-hidden">
                 <p>{mensaje}</p>
             </div>
         )
