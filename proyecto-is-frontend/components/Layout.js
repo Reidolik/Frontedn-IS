@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
                 <script src="https://cdn.tailwindcss.com"></script>
             </Head>
 
-            {router.pathname === "/login" || router.pathname === "/nuevacuenta"
+            {router.pathname === "/login" || router.pathname === "/nuevacuenta" || router.pathname === "/votar"
             ?
                 (
                     <div className="bg-gray-800 min-h-screen flex flex-col justify-center">

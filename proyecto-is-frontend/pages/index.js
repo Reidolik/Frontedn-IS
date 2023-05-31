@@ -15,7 +15,7 @@ export default function Home() {
   }
   
   const irAVotar = () => {
-    router.push('/login')
+    router.push('/votar')
   }
   
   return (

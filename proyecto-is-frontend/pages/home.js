@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "@/components/Layout"
 import { useRouter } from "next/router"
 import { useQuery, gql } from "@apollo/client"
@@ -21,10 +21,12 @@ const OBTENER_ELECCION = gql`
 
 const Home = () => {
 
+    let porcentaje = 0
+
     //Routing
     const router = useRouter()
 
-    //Query usuario
+    //Query eleccion
     const eleccionObtenida = useQuery(OBTENER_ELECCION, {
         variables: {
             anio: (new Date(Date.now()).getFullYear())
@@ -36,7 +38,9 @@ const Home = () => {
         return null
     }
 
-    console.log(((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(2))
+    if (eleccionObtenida.data) {
+        porcentaje = ((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(0)
+    }
 
     const irAIniciarEleccion = () => {
         router.push('/iniciareleccion')
@@ -83,13 +87,13 @@ const Home = () => {
                                         role="progressbar"
                                         aria-labelledby="ProgressLabel"
                                         aria-valuenow="50"
-                                        className="block rounded-full bg-gray-200"
+                                        className="block border border-gray-300 rounded-full bg-gray-200 mt-5"
                                     >
                                         <span
                                             className="block h-4 rounded-full bg-indigo-600 text-center text-[10px]/4"
-                                            style={{ width: `${((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(2)}%` }}
+                                            style={{ width: `${porcentaje}%` }}
                                         >
-                                            <span class="font-bold text-white"> {((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(2)}% </span>
+                                            <span class="font-bold text-white"> {porcentaje}% </span>
                                         </span>
                                     </span>
                                 </div>
