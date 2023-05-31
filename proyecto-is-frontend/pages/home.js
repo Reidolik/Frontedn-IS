@@ -1,11 +1,42 @@
-import React, { useEffect } from "react"
+import React, { useState } from "react"
 import Layout from "@/components/Layout"
 import { useRouter } from "next/router"
+import { useQuery, gql } from "@apollo/client"
+
+const OBTENER_ELECCION = gql`
+    query obtenerDatosEleccionActual($anio: Int!){
+        obtenerEleccion(anio: $anio) {
+            anio_eleccion
+            cantidad_partidos_activos
+        }
+        obtenerVotos {
+            ciudadano_id
+        }
+        obtenerCiudadanos {
+            nombre
+            apellido
+        }
+    }
+`
 
 const Home = () => {
 
     //Routing
     const router = useRouter()
+
+    //Query usuario
+    const eleccionObtenida = useQuery(OBTENER_ELECCION, {
+        variables: {
+            anio: (new Date(Date.now()).getFullYear())
+        }
+    })
+
+    //Proteger que no accedamos a data antes de tener los resultados
+    if (eleccionObtenida.loading) {
+        return null
+    }
+
+    console.log(((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(2))
 
     const irAIniciarEleccion = () => {
         router.push('/iniciareleccion')
@@ -18,8 +49,9 @@ const Home = () => {
                     <h1 className="text-3xl font-bold text-blue-900">¡Bienvenido!</h1>
                     <button
                         type="button"
-                        className="bg-green-800 text-white font-bold p-2 border border-gray-300 rounded-lg"
+                        className={eleccionObtenida.data.obtenerEleccion ? "bg-gray-500 text-white font-bold p-2 border border-gray-700 rounded-lg" : "bg-green-800 text-white font-bold p-2 border border-gray-300 rounded-lg"}
                         onClick={() => irAIniciarEleccion()}
+                        disabled={eleccionObtenida.data.obtenerEleccion}
                     >
                         ¡Iniciar elección!
                     </button>
@@ -55,9 +87,9 @@ const Home = () => {
                                     >
                                         <span
                                             className="block h-4 rounded-full bg-indigo-600 text-center text-[10px]/4"
-                                            style={{ width: '80%' }}
+                                            style={{ width: `${((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(2)}%` }}
                                         >
-                                            <span class="font-bold text-white"> 80% </span>
+                                            <span class="font-bold text-white"> {((eleccionObtenida.data.obtenerVotos.length * 100) / eleccionObtenida.data.obtenerCiudadanos.length).toFixed(2)}% </span>
                                         </span>
                                     </span>
                                 </div>
