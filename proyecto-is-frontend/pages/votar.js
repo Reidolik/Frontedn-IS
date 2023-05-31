@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useMutation, useQuery, gql } from "@apollo/client"
+import { readQuery } from '@apollo/client/cache'
 
 const OBTENER_ELECCION = gql`
     query obtenerDatosEleccionActual($anio: Int!){
@@ -45,6 +46,22 @@ const OBTENER_CIUDADANO = gql`
         autenticarCiudadano(dpi: $dpi) {
             id
             dpi
+            nombre
+            apellido
+        }
+    }
+`
+
+const OBTENER_DATOS_ELECCION = gql`
+    query obtenerDatosEleccionActual($anio: Int!){
+        obtenerEleccion(anio: $anio) {
+            anio_eleccion
+            cantidad_partidos_activos
+        }
+        obtenerVotos {
+            ciudadano_id
+        }
+        obtenerCiudadanos {
             nombre
             apellido
         }
@@ -300,7 +317,25 @@ const Votar = () => {
     const [autenticarCiudadano] = useMutation(OBTENER_CIUDADANO)
 
     //Mutation para el voto
-    const [nuevoVoto] = useMutation(CREAR_VOTO)
+    const [nuevoVoto] = useMutation(CREAR_VOTO, {
+        update(cache, { data: { nuevoVoto } }) {
+            //Obtener el objeto de cache que deseamos actualizar
+            const { obtenerVotos } = cache.readQuery({
+                query: OBTENER_DATOS_ELECCION,
+                variables: {
+                    anio: (new Date(Date.now()).getFullYear())
+                }
+            })
+
+            //Reescribimos el cache (NUNCA se debe modificar - SI reescribir)
+            cache.writeQuery({
+                query: OBTENER_DATOS_ELECCION,
+                data: {
+                    obtenerVotos: [...obtenerVotos, nuevoVoto]
+                }
+            })
+        }
+    })
 
     //Proteger que no accedamos a data antes de tener los resultados
     if (eleccionObtenida.loading && candidatosObtenidos.loading) {

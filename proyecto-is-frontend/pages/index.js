@@ -44,9 +44,7 @@ export default function Home() {
                     class="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
                   >
                     <p class="text-sm text-white">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
-                      perferendis hic asperiores quibusdam quidem voluptates doloremque
-                      reiciendis nostrum harum. Repudiandae?
+                      ¡Bienvenido a tus votaciones del 2023!, ingresa si eres un administrador o puedes votar si ya te verificaste en tu mesa.
                     </p>
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import Layout from "@/components/Layout"
 import { useRouter } from "next/router"
 import { useQuery, gql } from "@apollo/client"
 
-const OBTENER_ELECCION = gql`
+const OBTENER_DATOS_ELECCION = gql`
     query obtenerDatosEleccionActual($anio: Int!){
         obtenerEleccion(anio: $anio) {
             anio_eleccion
@@ -27,7 +27,7 @@ const Home = () => {
     const router = useRouter()
 
     //Query eleccion
-    const eleccionObtenida = useQuery(OBTENER_ELECCION, {
+    const eleccionObtenida = useQuery(OBTENER_DATOS_ELECCION, {
         variables: {
             anio: (new Date(Date.now()).getFullYear())
         }
