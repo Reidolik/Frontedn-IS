@@ -27,6 +27,26 @@ const Sidebar = ({ children }) => {
                         Ver mesas de votación
                     </Link>
                 </li>
+                <li className={router.pathname === "/ciudadanos" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/ciudadanos" className="text-white block mx-5">
+                        Ver ciudadanos
+                    </Link>
+                </li>
+                <li className={router.pathname === "/autoridadmesa" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/autoridadmesa" className="text-white block mx-5">
+                        Ver autoridades de mesas
+                    </Link>
+                </li>
+                <li className={router.pathname === "/candidatos" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/candidatos" className="text-white block mx-5">
+                        Ver candidatos
+                    </Link>
+                </li>
+                <li className={router.pathname === "/actasmesas" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/actasmesas" className="text-white block mx-5">
+                        Ver actas de mesas
+                    </Link>
+                </li>
                 <li className={router.pathname === "/iniciareleccion" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
                     <Link href="/iniciareleccion" className="text-white block mx-5">
                         Iniciar elección
@@ -37,6 +57,11 @@ const Sidebar = ({ children }) => {
                         Ingresar candidato
                     </Link>
                 </li>
+                <li className={router.pathname === "/nuevaautoridad" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/nuevaautoridad" className="text-white block mx-5">
+                        Ingresar autoridad de mesa
+                    </Link>
+                </li>
                 <li className={router.pathname === "/nuevociudadano" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
                     <Link href="/nuevociudadano" className="text-white block mx-5">
                         Registrar ciudadano
@@ -45,6 +70,11 @@ const Sidebar = ({ children }) => {
                 <li className={router.pathname === "/nuevamesavotacion" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
                     <Link href="/nuevamesavotacion" className="text-white block mx-5">
                         Nueva mesa de votacion
+                    </Link>
+                </li>
+                <li className={router.pathname === "/generaractamesa" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
+                    <Link href="/generaractamesa" className="text-white block mx-5">
+                        Generar acta de mesa
                     </Link>
                 </li>
                 <li className={router.pathname === "/votar" ? "bg-blue-800 p-2 rounded-full" : "p-2"}>
